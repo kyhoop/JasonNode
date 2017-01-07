@@ -1,12 +1,12 @@
 {
-  "name"         : "Jason-Node",
-  "version"      : "0.0.1",
-  "description"  : "Jason Node",
-  "main"         : "server.js",
-  "author"       : "Scotch",
-  "dependencies" : {
-    "express"    : "latest",
-    "request"    : "latest",
-    "cheerio"    : "latest"
+  "name": "Jason-Node",
+  "version": "0.0.1",
+  "description": "Jason Node",
+  "main": "server.js",
+  "author": "Scotch",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "express": "^4.14.0",
+    "request": "^2.79.0"
   }
 }

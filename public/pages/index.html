@@ -44,19 +44,17 @@
             // app know the current login status of the person.
             // Full docs on the response object can be found in the documentation
             // for FB.getLoginStatus().
-            if (response.status === 'connected') {
+            //if (response.status === 'connected') {
             // Logged into your app and Facebook.
-            testAPI();
-            } else if (response.status === 'not_authorized') {
+            //testAPI();
+            //} else if (response.status === 'not_authorized') {
             // The person is logged into Facebook, but not your app.
-            document.getElementById('status').innerHTML = 'Please log ' +
-                'into this app.';
-            } else {
+            //    document.getElementById('Logout').style.display = 'none';
+            //} else {
             // The person is not logged into Facebook, so we're not sure if
             // they are logged into this app or not.
-            document.getElementById('status').innerHTML = 'Please log ' +
-                'into Facebook.';
-            }
+            //    document.getElementById('Logout').style.display = 'none';
+            //}
         }
 
         function checkLoginState() {
@@ -93,8 +91,7 @@
             console.log('Welcome!  Fetching your information.... ');
             FB.api('/me', function(response) {
             console.log('Successful login for: ' + response.name);
-            document.getElementById('status').innerHTML =
-                'Thanks for logging in, ' + response.name + '!';
+            document.getElementById('Login').style.display = 'none';
             });
         }
 </script>
@@ -115,23 +112,8 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-  
-                                        <!--<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>-->
-                        
-                                        <!--<li><a href="#"><i class="fa fa-user fa-fw"></i>Login</a></li>-->
-                        
-                        <!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>-->
-                        <!--<li class="divider"></li>-->
-                        <!--
-                        </li>-->
-                    </ul>
-                    <!-- /.dropdown-user -->
+                <li class="navbar-brand">
+                    <div class="fb-login-button" data-size="large" data-auto-logout-link="true"></div>    
                 </li>
                 <!-- /.dropdown -->
             </ul>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jason Node</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+      <!-- Jason Node CSS -->
+    <link href="../dist/css/jasonnode.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-app="LineSelector" ng-controller="LineController">
+    <script>
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            //if (response.status === 'connected') {
+            // Logged into your app and Facebook.
+            //testAPI();
+            //} else if (response.status === 'not_authorized') {
+            // The person is logged into Facebook, but not your app.
+            //    document.getElementById('Logout').style.display = 'none';
+            //} else {
+            // The person is not logged into Facebook, so we're not sure if
+            // they are logged into this app or not.
+            //    document.getElementById('Logout').style.display = 'none';
+            //}
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1839236019668647',
+                cookie     : true,  // enable cookies to allow the server to access 
+                                    // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v2.8' // use graph api version 2.8
+            });
+        
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+            console.log('Successful login for: ' + response.name);
+            document.getElementById('Login').style.display = 'none';
+            });
+        }
+</script>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Jason Node</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="navbar-brand">
+                    <div class="fb-login-button" data-size="large" data-auto-logout-link="true"></div>    
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                       <!-- <script type="text/javascript">
+                            FB.api('/me', function (response) {
+                            alert('Welcome, ' + response.name + "!");
+                            alert('Your email id is : '+ response.email);
+                            })
+                        </script> -->
+                        <li>
+                            <a href="index.html"><i class="fa fa-edit fa-fw"></i>Lines</a>
+                        </li>
+                        <li>
+                            <a href="results.html"><i class="fa fa-bar-chart-o fa-fw"></i>Results</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Config</a>
+                        </li> -->
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4 class="page-header">Results</h4>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i>Result Log
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>Teams</td>
+                                    <td>Line</td>
+                                    <td>Final Score</td>
+                                    <td>Pick</td>
+                                    <td>User</td>
+                                    <td>Pick Time</td>
+                                    <td>Outcome</td>
+                                </tr><tr scope="row" ng-repeat="pick in Picks">
+                                    <td>{{ pick.Team1 }}<br/>{{ pick.Team2 }}</td>
+                                    <td>{{ pick.TeamLine1 }}<br/>{{ pick.TeamLine2 }}</td>
+                                    <td>{{ pick.Team1Score }}<br/>{{ pick.Team2Score }}</td>
+                                    <td>{{ pick.TeamPicked }}</td>
+                                    <td>{{ pick.User }}</td>
+                                    <td>{{ pick.PickTime }}
+                                    <td>{{ pick.Outcome }}</td>
+                                </tr>
+                                <tr>
+                                    
+                                    
+                                </tr>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <!--<script src="../vendor/raphael/raphael.min.js"></script> 
+    <script src="../vendor/morrisjs/morris.min.js"></script>
+    <script src="../data/morris-data.js"></script>-->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+    <script>
+        var app = angular.module('LineSelector', []);
+
+        app.controller('LineController', function($scope, $sce, $http) {
+            $http.get("http://localhost:8081/processPicks")
+            .then(function (response) {
+                $scope.Picks = response.data
+            });
+
+        $scope.isLocked = function(Locked) {
+            if(Locked == "Yes") {
+                return $sce.trustAsHtml('<span class="jn-lock fa fa-lock fa-2x" aria-hidden="true"></span>');
+            }
+            else {
+                return  $sce.trustAsHtml("No");
+            }
+        };
+
+        });
+    </script>
+</body>
+
+</html>
